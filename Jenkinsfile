@@ -5,7 +5,7 @@ pipeline{
         stage('Clone Repo') {
             steps {
                 // Pointing to your specific repo
-                git branch 'main' 'https://github.com/yogesh20coder/Yogesh_CI_CD_.git'
+                git branch: 'main', url: 'https://github.com/yogesh20coder/Yogesh_CI_CD_.git'
             }
         }
 
