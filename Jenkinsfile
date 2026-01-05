@@ -1,14 +1,7 @@
-pipeline{
+pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                // Pointing to your specific repo
-                git branch: 'main', url: 'https://github.com/yogesh20coder/Yogesh_CI_CD_.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t cicd-demo .'
@@ -18,10 +11,12 @@ pipeline{
         stage('Run Container') {
             steps {
                 sh '''
-                docker rm -f cicd-container || true
-                docker run -d -p 80:80 --name cicd-container cicd-demo
+                docker stop cicd-demo || true
+                docker rm cicd-demo || true
+                docker run -d -p 80:80 --name cicd-demo cicd-demo
                 '''
             }
         }
     }
 }
+
